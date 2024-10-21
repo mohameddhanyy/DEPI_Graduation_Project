@@ -130,3 +130,34 @@
 
 })(jQuery);
 
+// Array to store waiting and cart items
+let waitingList = JSON.parse(localStorage.getItem('waitingList')) || [];
+let cartList = JSON.parse(localStorage.getItem('cartList')) || [];
+
+// Add to waiting list
+document.querySelectorAll('.add-to-waiting').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const product = e.target.closest('.product');
+        const title = product.querySelector('.product-title').textContent;
+        const price = product.querySelector('.product-price').textContent;
+        const item = { title, price };
+        
+        waitingList.push(item);
+        localStorage.setItem('waitingList', JSON.stringify(waitingList));
+        alert(`${title} added to Waiting List!`);
+    });
+});
+
+// Add to cart
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const product = e.target.closest('.product');
+        const title = product.querySelector('.product-title').textContent;
+        const price = product.querySelector('.product-price').textContent;
+        const item = { title, price };
+        
+        cartList.push(item);
+        localStorage.setItem('cartList', JSON.stringify(cartList));
+        alert(`${title} added to Cart!`);
+    });
+});
